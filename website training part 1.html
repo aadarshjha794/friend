@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Friendship Day</title>
+    <style>
+        /* Background */
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(120deg, #ff758c, #ff7eb3, #fad0c4);
+            text-align: center;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+            color: white;
+            position: relative;
+        }
+
+        /* Envelope */
+        .letter-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            transition: opacity 1s ease-in-out;
+        }
+
+        .envelope {
+            width: 200px;
+            height: 150px;
+            background: #ffcccb;
+            position: relative;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .flap {
+            width: 0;
+            height: 0;
+            border-left: 100px solid transparent;
+            border-right: 100px solid transparent;
+            border-bottom: 75px solid #ff9999;
+            position: absolute;
+            top: -75px;
+            left: 0;
+            transform-origin: bottom;
+            transition: transform 1s ease-in-out;
+        }
+
+        .letter {
+            width: 180px;
+            height: 120px;
+            background: white;
+            position: absolute;
+            top: 15px;
+            left: 10px;
+            border-radius: 5px;
+            padding: 10px;
+            font-size: 14px;
+            color: black;
+            transform: translateY(30px);
+            opacity: 0;
+            transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+        }
+
+        .letter p {
+            margin: 0;
+            font-weight: bold;
+        }
+
+        /* Hidden main content */
+        .container {
+            display: none;
+            position: absolute;
+            top: 50px;
+            width: 80%;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: gold;
+            text-shadow: 0px 0px 15px gold;
+        }
+
+        .promise {
+            font-size: 1.4rem;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+
+        /* Floating Effects */
+        .heart {
+            position: absolute;
+            color: red;
+            font-size: 20px;
+            opacity: 0;
+            animation: floatUp 4s infinite;
+        }
+
+        .panda {
+            position: absolute;
+            font-size: 50px;
+            opacity: 0.8;
+            animation: floatPanda 6s infinite alternate ease-in-out;
+        }
+
+        @keyframes floatUp {
+            0% { opacity: 1; transform: translateY(0); }
+            100% { opacity: 0; transform: translateY(-200px); }
+        }
+
+        @keyframes floatPanda {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-20px); }
+        }
+
+        /* Button */
+        .open-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 1.2rem;
+            background: #ff7eb3;
+            border: none;
+            border-radius: 10px;
+            color: white;
+            cursor: pointer;
+        }
+
+        .open-btn:hover {
+            background: #ff4081;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Letter Envelope -->
+    <div class="letter-container" id="letterBox">
+        <div class="envelope" onclick="openLetter()">
+            <div class="flap" id="flap"></div>
+            <div class="letter" id="letterContent">
+                <p>Dear Best Friend,</p>
+                <p>Happy Friendship Day! 💖</p>
+                <p>Thank you for all the laughter, love, and support.</p>
+                <p>You are my greatest treasure! 🎁</p>
+                <p>Let's make more beautiful memories together. 🥰</p>
+            </div>
+        </div>
+        <button class="open-btn" onclick="openLetter()">Open Letter</button>
+    </div>
+
+    <!-- Friendship Day Wishes -->
+    <div class="container" id="friendshipBox">
+        <h1>🎉 Happy Friendship Day! 🎉</h1>
+        <p class="promise">💖 "No matter what happens, I will always stand by your side." 💖</p>
+        <p class="promise">🤝 "Friends today, friends forever, through every joy and sorrow!" 🤝</p>
+        <p class="promise">✨ "Our friendship is like a star – it shines even in the darkest times." ✨</p>
+        <p class="promise">💛 "Promise to make more amazing memories together!" 💛</p>
+    </div>
+
+    <!-- Floating Hearts -->
+    <script>
+        function createHeart() {
+            let heart = document.createElement("div");
+            heart.classList.add("heart");
+            heart.innerHTML = "❤️";
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.top = Math.random() * 100 + "vh";
+            document.body.appendChild(heart);
+            setTimeout(() => { heart.remove(); }, 4000);
+        }
+        setInterval(createHeart, 800);
+    </script>
+
+    <!-- Floating Pandas -->
+    <script>
+        function createPanda() {
+            let panda = document.createElement("div");
+            panda.classList.add("panda");
+            let animals = ["🐼", "🐶", "🐱", "🐰", "🦊", "🐻"];
+            panda.innerHTML = animals[Math.floor(Math.random() * animals.length)];
+            panda.style.left = Math.random() * 100 + "vw";
+            panda.style.top = Math.random() * 100 + "vh";
+            document.body.appendChild(panda);
+            setTimeout(() => { panda.remove(); }, 5000);
+        }
+        setInterval(createPanda, 1500);
+    </script>
+
+    <!-- Letter Opening Script -->
+    <script>
+        function openLetter() {
+            document.getElementById("flap").style.transform = "rotateX(180deg)";
+            document.getElementById("letterContent").style.opacity = "1";
+            document.getElementById("letterContent").style.transform = "translateY(0)";
+            
+            setTimeout(() => {
+                document.getElementById("letterBox").style.opacity = "0";
+                setTimeout(() => {
+                    document.getElementById("letterBox").style.display = "none";
+                    document.getElementById("friendshipBox").style.display = "block";
+                }, 1000);
+            }, 3000);
+        }
+    </script>
+
+</body>
+</html>
+
